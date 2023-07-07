@@ -45,7 +45,8 @@ public class Main {
             if(input.equals("1")){ // read file and stores in classList
                  Scanner sc;
 
-                   //enter csv filename
+                   //TODO allow for input of filename
+                   
                     try {
                     //reads csv file
                     sc = new Scanner(new File("Sample Schedule - Sheet1.csv")); //soon'll be filename
@@ -97,6 +98,7 @@ public class Main {
 
                     
                     if(input.toLowerCase().equals("a")){
+                         //TODO write schedule to file (method in SG)
                         System.out.println("future feature");
 
                     }

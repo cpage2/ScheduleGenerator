@@ -36,6 +36,7 @@ public class ScheduleGenerator {
 
     public void displayAllCourses(){
                System.out.println("----Courses----\n");
+               //TODO fix formatting
                 System.out.println("ID"+"\t"+"Name"+"\t"+"Days"+"\t"+ "Start Time"+ "\t" +"End Time\n");
             for(ScheduleGenerator g: classesCopy){
                  System.out.println(g.classId+"\t" +g.className+"\t"+g.days+"\t"+ g.startTime+ "\t" +g.endTime);
@@ -101,6 +102,10 @@ public class ScheduleGenerator {
                         }      
 
       }
+
+      public void saveSchedule(){
+        //TODO write schedule to  a file 
+      }
        
        
      public boolean classIdFound(String item){
@@ -126,7 +131,7 @@ public class ScheduleGenerator {
             return false;
      }  
 
-     public void emptyPicked(){
+     public void emptyPicked(){ //empties picked for regeneration
         picked.clear();
      }
 
