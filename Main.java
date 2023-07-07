@@ -12,34 +12,26 @@ public class Main {
 
 
         //Menu
-        /*
-         * Read File
-         * Display All Courses
-         * Generate Schedule
-         *      - option to try again
-         *      - option to save
-         * Close Program
-         */
+        
         
          ArrayList<String>classesFile = new ArrayList<>(); //to store lines of class info
          ArrayList<ScheduleGenerator> classList = new ArrayList<>();
           ScheduleGenerator sg = new ScheduleGenerator();
 
-        System.out.println("----Schedule Generator----\n");
-        System.out.println("Menu Options");
-        System.out.println("1: Read File");
-        System.out.println("2: Generate Schedule");
-        System.out.println("3: Exit");
-        System.out.print("Enter option number:");
+         System.out.println("----Schedule Generator----\n");
+             System.out.println("Menu Options");
+             System.out.println("1: Read File");
+             System.out.println("2: Generate Schedule");
+             System.out.println("3: Display All Courses");
+             System.out.println("0: Exit");
+             System.out.print("Enter option number:");
         Scanner s = new Scanner(System.in);
 
         String input = s.next();
        
 
-        while(input != "3"){
-            //if 1 read file
-            //if 2 display courses
-            //if 3 schedule generator
+        while(input != "0"){
+          
              
 
             if(input.equals("1")){ // read file and stores in classList
@@ -80,7 +72,7 @@ public class Main {
             }
 
             if(input.equals("2")){ //Schedule Generator
-                System.out.println("\n----Generated Schedule----\n");
+                
                 if(sg.numberOfClasses() == 0){System.out.println("List empty. Please read in file first (Option 1).\n");}
 
                 
@@ -98,8 +90,8 @@ public class Main {
 
                     
                     if(input.toLowerCase().equals("a")){
-                         //TODO write schedule to file (method in SG)
-                        System.out.println("future feature");
+                        
+                        sg.saveSchedule();
 
                     }
                     if(input.toLowerCase().equals("b")){
