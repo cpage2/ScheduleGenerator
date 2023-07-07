@@ -62,6 +62,8 @@ public class ScheduleGenerator {
             uniqueClasses.add(c.classId); //adds from classesCopy but no duplicates
         }
 
+        if(uniqueClasses.size() > 8){ return 8;} //set limit to 8 courses for students
+
         return uniqueClasses.size();
      }
 
