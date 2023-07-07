@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,13 +37,17 @@ public class ScheduleGenerator {
     }
 
     public void displayAllCourses(){
-               System.out.println("----Courses----\n");
+               System.out.println(String.format("%50s", "----Courses----\n"));
                //TODO fix formatting
-                System.out.println("ID"+"\t"+"Name"+"\t"+"Days"+"\t"+ "Start Time"+ "\t" +"End Time\n");
+               
+                
+                System.out.println(String.format("%-15s" +"%-28s"+ "%-15s"+"%-15s" + "%-15s", "ID","Name","Days", "Start", "End"));
             for(ScheduleGenerator g: classesCopy){
-                 System.out.println(g.classId+"\t" +g.className+"\t"+g.days+"\t"+ g.startTime+ "\t" +g.endTime);
+                 System.out.println("----------------------------------------------------------------------------------------------");
+                 System.out.println(String.format("%-15s" +"%-28s"+ "%-12s"+"%10s" + "%15s", g.classId, g.className,g.days, g.startTime,g.endTime) );
                  
             }
+            System.out.println("");
         
     }
     
@@ -50,13 +56,13 @@ public class ScheduleGenerator {
      
           //makes a count of unique classes in list
 
-        Set<String> mainClass = new HashSet<>();
+        Set<String> uniqueClasses = new HashSet<>();
 
         for(ScheduleGenerator c: classesCopy){
-            mainClass.add(c.classId); //adds from classesCopy but no duplicates
+            uniqueClasses.add(c.classId); //adds from classesCopy but no duplicates
         }
 
-        return mainClass.size();
+        return uniqueClasses.size();
      }
 
 
@@ -91,24 +97,69 @@ public class ScheduleGenerator {
                         randNum = (int)(Math.random()*(classesCopy.size()));
                       
            }
+
+                  picked.sort((d1,d2) -> d1.days.compareTo(d2.days)) ;
                     
                     int count = 1;
                     //Prints out schedule
-                    System.out.println("----Schedule----\n");
-                    for(ScheduleGenerator item: picked){
-                           
-                            System.out.println("Class " + count + ": "+ item.classId + " " + item.className + " " + item.days + " " + item.startTime + " " + item.endTime);
-                            count++;
-                        }      
+                    System.out.println(String.format("%50s", "----Schedule----\n"));
+                    System.out.println(String.format("%-15s" +"%-28s"+ "%-15s"+"%-15s" + "%-15s", "ID","Name","Days", "Start", "End"));
+                 
+                    for(ScheduleGenerator g: picked){
+                      System.out.println("----------------------------------------------------------------------------------------------");
+                      System.out.println(String.format("%-15s" +"%-28s"+ "%-12s"+"%10s" + "%15s", g.classId, g.className,g.days, g.startTime,g.endTime) );
+                      
+                  }
+                  System.out.println("");     
 
       }
 
-      public void saveSchedule(){
-        //TODO write schedule to  a file 
-      }
+    public void saveSchedule(){
        
-       
-     public boolean classIdFound(String item){
+        try {
+          File newFile = new File("MyClassSchedule.txt"); // creates file for generated schedule
+    
+            
+                  if(newFile.createNewFile()){
+                      try {
+                        FileWriter writer = new FileWriter(newFile);
+
+                         writer.write(String.format("%50s", "----Schedule----\n"));
+                         writer.write(String.format("%-15s" +"%-28s"+ "%-15s"+"%-15s" + "%-15s", "ID","Name","Days", "Start", "End"));
+                         writer.write("\n");
+
+                        for(ScheduleGenerator s: picked){
+                          writer.write("----------------------------------------------------------------------------------------------\n");
+                          writer.write(String.format("%-15s" +"%-28s"+ "%-12s"+"%10s" + "%15s", s.classId, s.className,s.days, s.startTime,s.endTime) );//writes picked schedule into new file
+                          writer.write("\n");
+                            
+                        }
+
+                        writer.close();
+                        System.out.print("Schedule saved.");
+                        
+                      } catch (Exception e) {
+                        
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                      }
+
+                      
+
+                  }
+           
+
+      
+               } catch (Exception e) {
+                   
+                   System.out.println("An error occurred.");
+                   e.printStackTrace();
+               }
+
+     }
+
+    
+    public boolean classIdFound(String item){
                 //checks for duplicate class id
                 for(ScheduleGenerator c: picked){
                         if(c.classId.equals(item)){
@@ -117,10 +168,10 @@ public class ScheduleGenerator {
                 }
 
               return false;
-     }  
+    }  
        
        
-     public boolean startTimeFound(String item){
+    public boolean startTimeFound(String item){
               //checks for duplicate start time
               for(ScheduleGenerator c: picked){
                       if(c.startTime.equals(item)){
@@ -129,10 +180,10 @@ public class ScheduleGenerator {
               }
 
             return false;
-     }  
+    }  
 
      public void emptyPicked(){ //empties picked for regeneration
         picked.clear();
      }
 
-    }
+ }
