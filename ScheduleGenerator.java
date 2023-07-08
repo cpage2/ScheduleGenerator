@@ -102,7 +102,7 @@ public class ScheduleGenerator {
 
                   picked.sort((d1,d2) -> d1.days.compareTo(d2.days)) ;
                     
-                    int count = 1;
+                   
                     //Prints out schedule
                     System.out.println(String.format("%50s", "----Schedule----\n"));
                     System.out.println(String.format("%-15s" +"%-28s"+ "%-15s"+"%-15s" + "%-15s", "ID","Name","Days", "Start", "End"));
@@ -148,6 +148,10 @@ public class ScheduleGenerator {
 
                       
 
+                  }
+
+                  else{
+                        
                   }
            
 
