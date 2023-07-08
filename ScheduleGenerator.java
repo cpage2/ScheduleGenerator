@@ -148,11 +148,11 @@ public class ScheduleGenerator {
                               fileFoundcount++;
                           }
 
-                           if(file.equalsIgnoreCase(filename+fileFoundcount+".txt")){
+                          
                                fileFoundcount++;
                               newFile = new File(filename+fileFoundcount+".txt");
 
-                           }
+                           
 
                          
                       }
