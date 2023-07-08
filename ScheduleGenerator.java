@@ -17,7 +17,7 @@ public class ScheduleGenerator {
     private String days;
     private String startTime;
     private String endTime;
-    private int fileFoundcount = 1;
+    private int fileFoundcount = 1; //used for renaming file if copy is found
     
  
     ScheduleGenerator(){}
