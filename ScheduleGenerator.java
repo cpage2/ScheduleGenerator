@@ -17,6 +17,7 @@ public class ScheduleGenerator {
     private String days;
     private String startTime;
     private String endTime;
+    private int fileFoundcount = 1;
     
  
     ScheduleGenerator(){}
@@ -117,50 +118,86 @@ public class ScheduleGenerator {
       }
 
     public void saveSchedule(){
+      
+         
        
         try {
           File newFile = new File("MyClassSchedule.txt"); // creates file for generated schedule
     
             
                   if(newFile.createNewFile()){
-                      try {
-                        FileWriter writer = new FileWriter(newFile);
 
-                         writer.write(String.format("%50s", "----Schedule----\n"));
-                         writer.write(String.format("%-15s" +"%-28s"+ "%-15s"+"%-15s" + "%-15s", "ID","Name","Days", "Start", "End"));
-                         writer.write("\n");
-
-                        for(ScheduleGenerator s: picked){
-                          writer.write("----------------------------------------------------------------------------------------------\n");
-                          writer.write(String.format("%-15s" +"%-28s"+ "%-12s"+"%10s" + "%15s", s.classId, s.className,s.days, s.startTime,s.endTime) );//writes picked schedule into new file
-                          writer.write("\n");
-                            
-                        }
-
-                        writer.close();
-                        System.out.print("Schedule saved.");
-                        
-                      } catch (Exception e) {
-                        
-                        System.out.println("An error occurred.");
-                        e.printStackTrace();
-                      }
-
-                      
-
+                          writeFile(newFile);
+                    
                   }
 
                   else{
+
+                      //if file is already created
+                      String directory = System.getProperty("user.dir"); //pulls current directory
+                      File directoryFile = new File(directory);
+
+                      String []fileList = directoryFile.list(); //makes list of directory items
+
+                      String filename = "MyClassSchedule";
+
+                      for(String file: fileList){
+                          if(file.equalsIgnoreCase(filename+".txt")){ //if file is found add rename with count
+                                
+                             newFile = new File(filename+fileFoundcount+".txt");
+                              fileFoundcount++;
+                          }
+
+                           if(file.equalsIgnoreCase(filename+fileFoundcount+".txt")){
+                               fileFoundcount++;
+                              newFile = new File(filename+fileFoundcount+".txt");
+
+                           }
+
+                         
+                      }
+
+                      if(newFile.createNewFile()){
+                          writeFile(newFile);
+                      }
+                       
                         
                   }
            
-
       
                } catch (Exception e) {
                    
                    System.out.println("An error occurred.");
                    e.printStackTrace();
                }
+
+     }
+
+     public void writeFile(File filename){ //writes a new file for generated schedule
+
+                try {
+                  FileWriter writer = new FileWriter(filename);
+
+                  writer.write(String.format("%50s", "----Schedule----\n"));
+                  writer.write(String.format("%-15s" +"%-28s"+ "%-15s"+"%-15s" + "%-15s", "ID","Name","Days", "Start", "End"));
+                  writer.write("\n");
+
+                  for(ScheduleGenerator s: picked){
+                    writer.write("----------------------------------------------------------------------------------------------\n");
+                    writer.write(String.format("%-15s" +"%-28s"+ "%-12s"+"%10s" + "%15s", s.classId, s.className,s.days, s.startTime,s.endTime) );//writes picked schedule into new file
+                    writer.write("\n");
+                      
+                  }
+
+                  writer.close();
+                  System.out.print("Schedule saved.");
+                  
+                } catch (Exception e) {
+                  
+                  System.out.println("An error occurred.");
+                  e.printStackTrace();
+                }
+
 
      }
 
@@ -187,6 +224,7 @@ public class ScheduleGenerator {
 
             return false;
     }  
+
 
      public void emptyPicked(){ //empties picked for regeneration
         picked.clear();
