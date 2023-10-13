@@ -39,10 +39,10 @@ public class ScheduleGenerator {
 
     public void displayAllCourses(){
                System.out.println(String.format("%50s", "----Courses----\n"));
-               //TODO fix formatting
+              
                
-                
                 System.out.println(String.format("%-15s" +"%-28s"+ "%-15s"+"%-15s" + "%-15s", "ID","Name","Days", "Start", "End"));
+        
             for(ScheduleGenerator g: classesCopy){
                  System.out.println("----------------------------------------------------------------------------------------------");
                  System.out.println(String.format("%-15s" +"%-28s"+ "%-12s"+"%10s" + "%15s", g.classId, g.className,g.days, g.startTime,g.endTime) );
@@ -68,15 +68,6 @@ public class ScheduleGenerator {
         return uniqueClasses.size();
      }
 
-
-    //use size to pick size amount of unique classes from entire list
-    /*
-     *  1. picks from class one use code
-     *  2. picks days/times based of course code
-     *  3. repeats for next three classes
-     *       - check days & times for matches
-     *       - if match pull next
-     */
 
 
     public  void  schedGen(){
@@ -104,7 +95,6 @@ public class ScheduleGenerator {
                   picked.sort((d1,d2) -> d1.days.compareTo(d2.days)) ;
                     
                    
-                    //Prints out schedule
                     System.out.println(String.format("%50s", "----Schedule----\n"));
                     System.out.println(String.format("%-15s" +"%-28s"+ "%-15s"+"%-15s" + "%-15s", "ID","Name","Days", "Start", "End"));
                  
@@ -190,7 +180,7 @@ public class ScheduleGenerator {
 
                   for(ScheduleGenerator s: picked){
                     writer.write("----------------------------------------------------------------------------------------------\n");
-                    writer.write(String.format("%-15s" +"%-28s"+ "%-12s"+"%10s" + "%15s", s.classId, s.className,s.days, s.startTime,s.endTime) );//writes picked schedule into new file
+                    writer.write(String.format("%-15s" +"%-28s"+ "%-12s"+"%10s" + "%15s", s.classId, s.className,s.days, s.startTime,s.endTime) );
                     writer.write("\n");
                       
                   }
@@ -209,7 +199,7 @@ public class ScheduleGenerator {
 
     
     public boolean classIdFound(String item){
-                //checks for duplicate class id
+              
                 for(ScheduleGenerator c: picked){
                         if(c.classId.equals(item)){
                           return true;
@@ -221,7 +211,7 @@ public class ScheduleGenerator {
        
        
     public boolean startTimeFound(String item){
-              //checks for duplicate start time
+             
               for(ScheduleGenerator c: picked){
                       if(c.startTime.equals(item)){
                         return true;
@@ -232,7 +222,7 @@ public class ScheduleGenerator {
     }  
 
 
-     public void emptyPicked(){ //empties picked for regeneration
+     public void emptyPicked(){ //empties picked list for regeneration
         picked.clear();
      }
 
