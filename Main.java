@@ -10,9 +10,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-        //Menu
-        
         
          ArrayList<String>classesFile = new ArrayList<>(); //to store lines of class info
          ArrayList<ScheduleGenerator> classList = new ArrayList<>();
@@ -36,12 +33,10 @@ public class Main {
 
             if(input.equals("1")){ // read file and stores in classList
                  Scanner sc;
-
-                   //TODO allow for input of filename
                    
                     try {
-                    //reads csv file
-                    sc = new Scanner(new File("Sample Schedule - Sheet1.csv")); //soon'll be filename
+                   
+                    sc = new Scanner(new File("Sample Schedule - Sheet1.csv")); 
                 
                         while(sc.hasNextLine()){
                             classesFile.add(sc.nextLine());
@@ -62,7 +57,7 @@ public class Main {
                      sc.close();
 
                     } catch (FileNotFoundException e) {
-                        // TODO Auto-generated catch block
+                        
                         e.printStackTrace();
                     }
 
